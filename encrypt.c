@@ -1,10 +1,11 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 void removeSpaces (char *str);
-void removeCharacters(char* alpha, char* pass, char* build, char* alp);
 void decrypt(char* encryptedText, char* pass);
+void removeCharacters(char* alpha, char* pass, char* build, char* alp);
 
 /*
 takes some text and a password, it then removes any spaces or duplicate characters from the password and then creates a key by
@@ -75,6 +76,8 @@ void decrypt(char* encryptedText, char* pass){
 	text[z] = ' ';
 	printf("%s\n",text);
 }
+
+
 /*
 removes the characters from the alphabet that are already contained in the password, 
 the remaining characters of the alphabet are then concatenated onto the end of the password 
@@ -82,18 +85,14 @@ the remaining characters of the alphabet are then concatenated onto the end of t
 void removeCharacters(char* alpha, char* pass, char* build, char* alp){
 	int j;
 	int y;
-	int z = 1;
-
+	int z = 0;
+	int boolean;
+	
 	build[0] = pass[0];
-
-	int boolean = 1;
-	for(y = 1; y < strlen(pass); y++){
+	for(y = 0; y < strlen(pass); y++){
+		boolean = 1;
 		for(j = 0; j < strlen(build); j++){
 			if(build[j] == pass[y]){
-				boolean = 2;
-				break;
-			}
-			if(pass[y] == ' '){
 				boolean = 2;
 				break;
 			}
@@ -102,15 +101,14 @@ void removeCharacters(char* alpha, char* pass, char* build, char* alp){
 			build[z] = pass[y];
 			z++;
 		}
-		boolean = 1;
 	}
-
 	build[z] = ' ';
+	
 	removeSpaces(build);
 	z = 0;
-	boolean = 1;
 
 	for(j = 0; j < strlen(alpha); j++){
+			boolean = 1;
 		for(y = 0; y < strlen(build); y++){
 			if((build[y] = toupper(build[y])) == alpha[j]){
 				boolean = 2;
@@ -121,11 +119,10 @@ void removeCharacters(char* alpha, char* pass, char* build, char* alp){
 			alp[z] = alpha[j];
 			z++;
 		}
-		boolean = 1;
 	}
 	alp[z] = ' ';
-	strcat(build, alp);
 
+	strcat(build, alp);
 }
 /*
 for a string removes any ' ', needed this for when the password contained more then one word e.g "hello sir"
