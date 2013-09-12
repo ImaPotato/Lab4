@@ -88,6 +88,7 @@ void removeCharacters(char* alpha, char* pass, char* build, char* alp){
 	int z = 0;
 	int boolean;
 	
+	//build[0] = pass[0];
 	for(y = 0; y < strlen(pass); y++){
 		boolean = 1;
 		for(j = 0; j < strlen(build); j++){
@@ -122,6 +123,7 @@ void removeCharacters(char* alpha, char* pass, char* build, char* alp){
 	alp[z] = ' ';
 
 	strcat(build, alp);
+	printf("%s\n",build);
 }
 /*
 for a string removes any ' ', needed this for when the password contained more then one word e.g "hello sir"
