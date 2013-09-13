@@ -37,7 +37,7 @@ void encrypt(char *text, char* pass) {
 
 	encryptedText[i] = ' ';
 	printf("%s\n", encryptedText);
-		decrypt(encryptedText, pass);
+	//	decrypt(encryptedText, pass);
 }
 /*
 takes an encrypted string and a password and matches each character from the encrypted string against a key
@@ -138,13 +138,20 @@ void removeSpaces (char *str) {
 }
 /*
 reads in the first 1000 characters of the text document and calls encrypt with the buffer and password from the command line
+must type ENCODE in all caps
 */
 int main(int argc, char *argv[]) {
 	char buffer[1000];
 	FILE* f = fopen(argv[1], "r");
 	if(f != NULL){
+
 		fread(buffer, 1000, 1, f);
-		encrypt(buffer, argv[2]); 
+		if(strcmp("ENCODE", argv[2]) == 0){
+			encrypt(buffer, argv[3]); 
+		} else {
+			decrypt(buffer, argv[3]);
+		}
+
 	}
 	fclose(f);
   
